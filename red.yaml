@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: red
+  name: red
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: red
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: red
+    spec:
+      containers:
+      - image: jpetazzo/color
+        name: color
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: red
+  namespace: shpod
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: red.tipzip.xyz
+  labels:
+    app: red
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: red
