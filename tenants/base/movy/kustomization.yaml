@@ -5,3 +5,4 @@ resources:
 - rbac.yaml
 - sync.yaml
 - M6-movy-ingress.yaml
+- red.yaml

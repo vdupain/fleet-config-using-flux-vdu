@@ -3,18 +3,19 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: red
-  name: red
+    app: yellow
+  name: yellow
+  namespace: rocky-test
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: red
+      app: yellow
   template:
     metadata:
       creationTimestamp: null
       labels:
-        app: red
+        app: yellow
     spec:
       containers:
       - image: jpetazzo/color
@@ -23,12 +24,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: red
-  namespace: shpod
+  name: yellow
+  namespace: rocky-test
   annotations:
-    external-dns.alpha.kubernetes.io/hostname: red.tipzip.xyz
+    external-dns.alpha.kubernetes.io/hostname: yellow.tipzip.xyz
   labels:
-    app: red
+    app: yellow
 spec:
   type: LoadBalancer
   ports:
@@ -36,4 +37,4 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: red
+    app: yellow
