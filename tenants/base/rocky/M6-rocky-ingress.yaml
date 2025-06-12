@@ -12,7 +12,7 @@ spec:
     - rocky.test.tipzip.xyz
     secretName: rocky-test-tls
   rules:
-    - host: rock.test.tipzip.xyz # rocky.test.mybestdomain.com
+    - host: rocky.test.tipzip.xyz # rocky.test.mybestdomain.com
       http:
         paths:
           - path: /
