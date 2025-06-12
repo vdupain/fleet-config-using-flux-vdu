@@ -6,3 +6,4 @@ resources:
 - sync.yaml
 - M6-rocky-ingress.yaml
 - yellow.yaml
+- yellow-ingress.yaml

@@ -5,7 +5,7 @@ metadata:
   namespace: rocky-test
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-dns01-issuer
-    external-dns.alpha.kubernetes.io/cloudflare-custom-hostname: yellow.tipzip.xyz
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 spec:
   ingressClassName: "nginx"
   tls:
