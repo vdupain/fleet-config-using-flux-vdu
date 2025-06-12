@@ -9,10 +9,10 @@ spec:
   ingressClassName: "nginx"
   tls:
   - hosts:
-    - rocky.test.tipzip.xyz
+    - rocky-test.tipzip.xyz
     secretName: rocky-test-tls
   rules:
-    - host: rocky.test.tipzip.xyz # rocky.test.mybestdomain.com
+    - host: rock-test.tipzip.xyz # rocky.test.mybestdomain.com
       http:
         paths:
           - path: /
