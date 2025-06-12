@@ -3,14 +3,14 @@ kind: Ingress
 metadata:
   name: rocky
   namespace: rocky-test
-  annotations:
-    cert-manager.io/cluster-issuer: letsencrypt-dns01-issuer
+  # annotations:
+  #   cert-manager.io/cluster-issuer: letsencrypt-dns01-issuer
 spec:
   ingressClassName: "nginx"
-  tls:
-  - hosts:
-    - rocky-test.tipzip.xyz
-    secretName: rocky-test-tls
+  # tls:
+  # - hosts:
+  #   - rocky-test.tipzip.xyz
+  #   secretName: rocky-test-tls
   rules:
     - host: rock-test.tipzip.xyz # rocky.test.mybestdomain.com
       http:
