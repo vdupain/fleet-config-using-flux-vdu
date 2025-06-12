@@ -1,0 +1,60 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cert-manager
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 24h
+  url: https://charts.jetstack.io
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cert-manager
+      version: 1.17.1
+      sourceRef:
+        kind: HelmRepository
+        name: cert-manager
+        namespace: cert-manager
+      interval: 12h
+  values:
+    installCRDs: true
+---
+apiVersion: v1
+data:
+  api-key: bUJxR0MzRXNwSzVpQmhhSXdmcEhqRW9Kb3UxVURybkJvSGRXbDJBSQ==
+kind: Secret
+metadata:
+  name: cloudflare-api-key-secret
+  namespace: cert-manager
+type: Opaque
+---
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-dns01-issuer
+spec:
+  acme:
+    server: https://acme-v02.api.letsencrypt.org/directory
+    email: vdupain@gmail.com
+    privateKeySecretRef:
+      name: letsencrypt-dns01-private-key
+    solvers:
+    - dns01:
+        cloudflare:
+          email: vdupain@gmail.com
+          apiTokenSecretRef:
+            name: cloudflare-api-key-secret
+            key: api-key
