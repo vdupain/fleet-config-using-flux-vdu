@@ -3,10 +3,17 @@ kind: Ingress
 metadata:
   name: movy
   namespace: movy-test
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-dns01-issuer
+    external-dns.alpha.kubernetes.io/cloudflare-proxied: "false"
 spec:
   ingressClassName: "nginx"
+  tls:
+  - hosts:
+    - movy.staging.tipzip.xyz
+    secretName: movy-staging-tls
   rules:
-    - host: movy.test.tipzip.xyz # movy.test.mybestdomain.com
+    - host: movy.staging.tipzip.xyz # movy.test.mybestdomain.com
       http:
         paths:
           - path: /
